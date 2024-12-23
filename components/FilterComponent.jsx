@@ -3,7 +3,13 @@ import { useFilter } from "@/context/FilterContext"; // Import your context if n
 import { FaTimes, FaBars } from "react-icons/fa"; // Close and Hamburger icons
 
 const FilterDropdown = () => {
-  const { selectedCategory, setSelectedCategory, priceRange, setPriceRange, categories } = useFilter();
+  const {
+    selectedCategory,
+    setSelectedCategory,
+    priceRange,
+    setPriceRange,
+    categories,
+  } = useFilter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [zIndex, setZIndex] = useState(10);
 
@@ -38,7 +44,7 @@ const FilterDropdown = () => {
       {/* Hamburger button for mobile */}
       <button
         onClick={toggleDropdown}
-        className="md:hidden px-4 py-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-700 hover:to-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+        className="md:hidden px-4 py-2 bg-gradient-to-r from-black to-gray-500 text-white rounded-lg shadow-md hover:from-black hover:to-gray transition duration-300 ease-in-out transform hover:scale-105"
         aria-expanded={isDropdownOpen}
         aria-controls="filter-dropdown"
       >
@@ -59,7 +65,12 @@ const FilterDropdown = () => {
       {isDropdownOpen && (
         <div
           id="filter-dropdown"
-          className="absolute top-0 left-0 w-full h-screen md:right-0 md:top-auto md:mt-2 md:w-64 bg-white shadow-lg rounded-lg border p-4 transition-opacity duration-300 ease-in-out"
+          className={`absolute ${
+            isDropdownOpen ? "opacity-100" : "opacity-0"
+          } transition-opacity duration-300 ease-in-out ${
+            // Adjust dropdown styles for mobile and normal screens
+            "top-0 left-100 w-full  md:w-80 md:h-auto md:right-0 md:top-auto md:mt-2 md:shadow-lg md:rounded-lg"
+          } bg-white shadow-lg border p-4`}
           style={{ zIndex }}
         >
           {/* Close Button */}
@@ -108,10 +119,15 @@ const FilterDropdown = () => {
 
           {/* Price Filter */}
           <div className="mb-4">
-            <h4 className="text-sm font-medium text-gray-800 mb-2">Price Range</h4>
+            <h4 className="text-sm font-medium text-gray-800 mb-2">
+              Price Range
+            </h4>
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
-                <label htmlFor="price" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="price"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Price:
                 </label>
                 <span className="text-sm font-semibold text-blue-600">
