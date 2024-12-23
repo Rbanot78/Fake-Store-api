@@ -39,7 +39,7 @@ const Pagination = ({
       {/* Previous Button */}
       <button
         onClick={() => handlePageChange(currentPage - 1)}
-        className="px-5 py-2 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-full hover:from-blue-600 hover:to-teal-500 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-5 py-2 bg-black text-white rounded-full hover:from-blue-600 hover:to-teal-500 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={currentPage === 1}
       >
         <span className="font-semibold">Previous</span>
@@ -65,7 +65,7 @@ const Pagination = ({
       {/* Next Button */}
       <button
         onClick={() => handlePageChange(currentPage + 1)}
-        className="px-5 py-2 bg-gradient-to-r from-blue-500 to-teal-400 text-white rounded-full hover:from-blue-600 hover:to-teal-500 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-5 py-2 bg-black text-white rounded-full hover:from-blue-600 hover:to-teal-500 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={currentPage === totalPages}
       >
         <span className="font-semibold">Next</span>

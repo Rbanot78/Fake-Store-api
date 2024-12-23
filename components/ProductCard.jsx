@@ -58,7 +58,7 @@ const ProductCard = ({
       <div className="flex justify-between items-center mt-4">
         <Link
           href={`/product/${product.id}`}
-          className="text-blue-600 hover:text-blue-800 transition font-medium flex items-center"
+          className="text-gray-600 hover:text-black transition font-medium flex items-center"
         >
           View Details
           <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
@@ -66,7 +66,7 @@ const ProductCard = ({
         <div className="flex gap-2">
           <motion.button
             onClick={() => handleAddToCart(product)}
-            className="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300"
+            className="p-2 bg-gray-500 text-white rounded-full hover:bg-black transition-all duration-300"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >

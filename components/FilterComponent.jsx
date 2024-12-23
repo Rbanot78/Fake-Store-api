@@ -5,15 +5,38 @@ import { FaTimes } from "react-icons/fa"; // Close icon
 const FilterDropdown = () => {
   const { selectedCategory, setSelectedCategory, priceRange, setPriceRange, categories } = useFilter(); // Access categories from context
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [zIndex, setZIndex] = useState(10); // Set initial z-index value
 
-  // Toggle dropdown visibility
+  // Toggle dropdown visibility and increase z-index
   const toggleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev);
+    setIsDropdownOpen((prev) => {
+      const newState = !prev;
+      if (newState) {
+        // Increase z-index when dropdown is opened
+        setZIndex(20);
+      } else {
+        // Reset z-index when dropdown is closed
+        setZIndex(10);
+      }
+      return newState;
+    });
   };
 
-  // Close dropdown
+  // Close dropdown and reset z-index
   const closeDropdown = () => {
     setIsDropdownOpen(false);
+    setZIndex(10); // Reset z-index when closed
+  };
+
+  // Handle price range changes
+  const handlePriceChange = (e) => {
+    setPriceRange([0, Number(e.target.value)]);
+  };
+
+  // Reset both category and price range
+  const resetFilters = () => {
+    setSelectedCategory("");
+    setPriceRange([0, 1000]); // Reset to full range
   };
 
   return (
@@ -22,13 +45,19 @@ const FilterDropdown = () => {
       <button
         onClick={toggleDropdown}
         className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-700 hover:to-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+        aria-expanded={isDropdownOpen}
+        aria-controls="filter-dropdown"
       >
         Filter Options
       </button>
 
       {/* Dropdown Menu */}
       {isDropdownOpen && (
-        <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg border p-4 z-10">
+        <div
+          id="filter-dropdown"
+          className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg border p-4 transition-opacity duration-300 ease-in-out"
+          style={{ zIndex }}
+        >
           {/* Close Button */}
           <button
             onClick={closeDropdown}
@@ -61,7 +90,7 @@ const FilterDropdown = () => {
                 <p className="text-sm text-gray-500">No categories available</p>
               )}
               <button
-                onClick={() => setSelectedCategory("")}
+                onClick={() => resetFilters()} // Reset both category and price range
                 className={`text-sm font-medium py-2 px-4 rounded-md border-2 transition-all duration-300 ${
                   !selectedCategory
                     ? "bg-blue-500 text-white border-blue-600"
@@ -91,8 +120,9 @@ const FilterDropdown = () => {
                 min="0"
                 max="1000"
                 value={priceRange[1]}
-                onChange={(e) => setPriceRange([0, Number(e.target.value)])}
+                onChange={handlePriceChange}
                 className="w-full h-2 bg-blue-500 rounded-full focus:outline-none"
+                aria-label="Price Range"
               />
             </div>
           </div>

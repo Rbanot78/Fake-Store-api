@@ -45,7 +45,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 shadow-lg transition-all duration-300">
+    <nav className="bg-gradient-to-r from-black to-gray-700 shadow-lg transition-all duration-300">
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
         {/* Left - Logo */}
         <div className="text-4xl font-bold text-white">
@@ -107,7 +107,7 @@ const Navbar = () => {
                 )}
                 <div className="mt-4">
                   <Link href="/cart">
-                    <button className="w-full text-center py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">
+                    <button className="w-full text-center py-2 bg-gray-600 text-white rounded-md hover:bg-black transition duration-300">
                       View Cart
                     </button>
                   </Link>
@@ -169,7 +169,7 @@ const Navbar = () => {
                 )}
                 <div className="mt-4">
                   <Link href="/wishlist">
-                    <button className="w-full text-center py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">
+                    <button className="w-full text-center py-2  bg-gray-600 text-white rounded-md hover:bg-black  transition duration-300">
                       View Wishlist
                     </button>
                   </Link>

@@ -1,8 +1,8 @@
-// pages/cart.js
-import { useFilter } from '@/context/FilterContext';
-import { useState } from 'react';
-import Link from 'next/link';  // Import Link for navigation
-import CartDetails from '@/components/CartDetails';  // Import the CartDetails component
+import Head from "next/head"; // Import Head component for SEO
+import { useFilter } from "@/context/FilterContext";
+import { useState } from "react";
+import Link from "next/link"; // Import Link for navigation
+import CartDetails from "@/components/CartDetails"; // Import the CartDetails component
 
 const Cart = () => {
   const { cartItems, total } = useFilter();
@@ -14,6 +14,11 @@ const Cart = () => {
 
   return (
     <div className="cart container mx-auto p-6">
+      <Head>
+        <title>Your Cart - Shop</title> {/* Title for Cart page */}
+        <link rel="icon" href="/favicon.ico" /> {/* Favicon */}
+      </Head>
+
       <h2 className="text-3xl font-extrabold text-gray-800 mb-6">Your Cart</h2>
       
       {/* Home Button */}
