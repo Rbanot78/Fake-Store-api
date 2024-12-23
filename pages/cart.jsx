@@ -12,6 +12,9 @@ const Cart = () => {
     return <div className="text-center">Loading...</div>;
   }
 
+  // Round total price to two decimal places
+  const roundedTotal = total.toFixed(2);
+
   return (
     <div className="cart container mx-auto p-6">
       <h2 className="text-3xl font-extrabold text-gray-800 mb-6">Your Cart</h2>
@@ -36,7 +39,7 @@ const Cart = () => {
           {/* Cart Total */}
           <div className="mt-6 bg-gray-100 p-5 rounded-lg flex justify-between items-center shadow-md">
             <h3 className="text-xl font-semibold text-gray-800">Total Price:</h3>
-            <p className="text-xl font-bold text-blue-600">${total}</p>
+            <p className="text-xl font-bold text-blue-600">${roundedTotal}</p>
           </div>
 
           {/* Checkout Button */}

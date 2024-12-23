@@ -4,37 +4,48 @@ import { FaTrash, FaShoppingCart } from "react-icons/fa";
 
 const WishlistItem = ({ product, onAddToCart, onRemoveFromWishlist }) => {
   return (
-    <div className="bg-white rounded-xl shadow-lg hover:shadow-2xl transform transition duration-300 ease-in-out hover:scale-105">
-      <Link href={`/product/${product.id}`}>
-        <div className="relative cursor-pointer">
+    <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transform transition duration-300 ease-in-out hover:scale-105">
+      {/* Product Image */}
+      <Link href={`/product/${product.id}`} className="block">
+        <div className="relative overflow-hidden rounded-t-2xl">
           <img
             src={product.image}
             alt={product.title}
-            className="object-cover w-full h-64 rounded-t-xl transition duration-300 ease-in-out transform hover:scale-110"
+            className="object-cover w-full h-64 rounded-t-2xl transition-transform duration-500 hover:scale-110"
           />
         </div>
       </Link>
-      <div className="p-4">
+
+      {/* Product Details */}
+      <div className="p-5">
+        {/* Product Title */}
         <Link href={`/product/${product.id}`}>
-          <h3 className="text-lg font-semibold text-gray-800 truncate cursor-pointer hover:text-blue-600">
-            {product.title.length > 18
-              ? `${product.title.substring(0, 18)}...`
+          <h3 className="text-lg md:text-xl font-bold text-gray-800 truncate cursor-pointer hover:text-blue-500 transition-colors duration-300">
+            {product.title.length > 20
+              ? `${product.title.substring(0, 20)}...`
               : product.title}
           </h3>
         </Link>
-        <p className="text-lg text-blue-600 mt-2 font-medium">${product.price}</p>
+
+        {/* Product Price */}
+        <p className="text-xl font-semibold text-blue-600 mt-3">${product.price}</p>
       </div>
-      <div className="flex justify-between items-center p-4 bg-gray-100 rounded-b-xl">
+
+      {/* Actions */}
+      <div className="flex justify-between items-center px-5 py-4 bg-gray-50 rounded-b-2xl">
+        {/* Add to Cart Button */}
         <button
           onClick={() => onAddToCart(product)}
-          className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 flex items-center justify-center"
+          className="flex items-center gap-2 px-6 py-2 text-white bg-gray-500 rounded-full shadow-md hover:bg-black transition-all duration-300"
         >
-          <FaShoppingCart className="mr-2 inline-block" />
-          Add to Cart
+          <FaShoppingCart />
+          <span>Add to Cart</span>
         </button>
+
+        {/* Remove Button */}
         <button
           onClick={() => onRemoveFromWishlist(product.id)}
-          className="text-red-600 hover:text-red-800 transition duration-300"
+          className="text-gray-400 hover:text-red-600 transition duration-300"
         >
           <FaTrash className="h-6 w-6" />
         </button>

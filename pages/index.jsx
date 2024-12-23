@@ -82,7 +82,7 @@ const Home = ({ initialProducts }) => {
 
  
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="flex flex-col min-h-screen bg-gray-500">
       <Navbar />
       <div className="container mx-auto px-6 py-8 lg:px-16 bg-gradient-to-r from-blue-50 to-indigo-100 backdrop-blur-md bg-opacity-50">
         <div className="flex items-center justify-between gap-6 mb-8 flex-wrap">

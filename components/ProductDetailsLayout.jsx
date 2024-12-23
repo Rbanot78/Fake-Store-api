@@ -1,7 +1,8 @@
 import { FaShoppingCart, FaTrash, FaHeart, FaRegHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Dialog } from "@headlessui/react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
+import { useFilter } from "@/context/FilterContext"; // Import the context
 
 const ProductDetailsLayout = ({
   product,
@@ -12,36 +13,76 @@ const ProductDetailsLayout = ({
   addToWishlist,
   removeFromWishlist,
 }) => {
+  const { updateCartItem, cartItems } = useFilter(); // Get the function to update cart
+
+  const currentCartItem = cartItems.find(item => item.id === product.id); // Find current product in cart
+
+  // Handles adding to the cart with appropriate toasts
   const handleAddToCart = () => {
     if (!isProductInCart) {
       addToCart(product);
-      toast.success("Added to cart!");
+      toast.success("Added to cart!", {
+        position: "top-center",
+      });
     } else {
-      toast.error("This product is already in the cart!");
+      toast.error("This product is already in the cart!", {
+        position: "top-center",
+      });
     }
   };
 
+  // Handles removing from the cart
   const handleRemoveFromCart = () => {
     removeCartItem(product.id);
-    toast.success("Removed from cart!");
+    toast.success("Removed from cart!", {
+      position: "top-center",
+    });
   };
 
+  // Handles adding to the wishlist with appropriate toasts
   const handleAddToWishlist = () => {
     if (!isProductInWishlist) {
       addToWishlist(product);
-      toast.success("Added to wishlist!");
+      toast.success("Added to wishlist!", {
+        position: "top-center",
+      });
     } else {
-      toast.error("This product is already in the wishlist!");
+      toast.error("This product is already in the wishlist!", {
+        position: "top-center",
+      });
     }
   };
 
+  // Handles removing from the wishlist
   const handleRemoveFromWishlist = () => {
     removeFromWishlist(product.id);
-    toast.success("Removed from wishlist!");
+    toast.success("Removed from wishlist!", {
+      position: "top-center",
+    });
+  };
+
+  // Handle quantity change
+  const handleQuantityChange = (event) => {
+    const quantity = parseInt(event.target.value, 10);
+    if (quantity >= 0) {
+      updateCartItem(product.id, quantity);
+    }
+  };
+
+  // Handle rating change
+  const handleRatingChange = (newRating) => {
+    // Update rating in cart
+    updateCartItem(product.id, { ...product, rating: { rate: newRating, count: product.rating.count } });
+    toast.success(`Rating updated to ${newRating}`, {
+      position: "top-center",
+    });
   };
 
   return (
     <div className="flex flex-col md:flex-row gap-10">
+      {/* Toast notifications */}
+      <Toaster />
+
       {/* Product Image */}
       <div className="w-full md:w-1/2 flex justify-center mb-6 md:mb-0">
         <motion.div
@@ -60,13 +101,56 @@ const ProductDetailsLayout = ({
       {/* Product Info and Actions */}
       <div className="w-full md:w-1/2">
         {/* Product Info */}
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">{product.title}</h1>
-        <p className="text-lg sm:text-xl text-gray-700 mb-6">{product.description}</p>
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+          {product.title}
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-700 mb-6">
+          {product.description}
+        </p>
         <div className="flex items-center mb-4 space-x-4">
           <p className="text-xl sm:text-2xl font-bold text-gray-800">Price:</p>
-          <p className="text-xl sm:text-2xl text-blue-600 font-semibold">${product.price}</p>
+          <p className="text-xl sm:text-2xl text-blue-600 font-semibold">
+            ${product.price}
+          </p>
         </div>
-        <p className="text-md sm:text-lg text-gray-600 font-medium mb-6">Category: {product.category}</p>
+        <p className="text-md sm:text-lg text-gray-600 font-medium mb-6">
+          Category: {product.category}
+        </p>
+
+        {/* Rating Display */}
+        <div className="flex items-center mb-4 space-x-2">
+          <p className="text-lg font-medium text-gray-800">Rating:</p>
+          <div className="flex items-center space-x-1">
+            {Array.from({ length: 5 }, (_, index) => (
+              <motion.div
+                key={index}
+                onClick={() => handleRatingChange(index + 1)}
+                className={`cursor-pointer ${index < product.rating.rate ? 'text-yellow-500' : 'text-gray-300'}`}
+                whileHover={{ scale: 1.2 }}
+              >
+                <FaHeart />
+              </motion.div>
+            ))}
+            <span className="text-sm text-gray-600">({product.rating.count} reviews)</span>
+          </div>
+        </div>
+
+        {/* Quantity Selector */}
+        {isProductInCart && currentCartItem && (
+          <div className="flex items-center mb-6">
+            <label htmlFor="quantity" className="text-lg sm:text-xl font-semibold text-gray-800 mr-4">
+              Quantity:
+            </label>
+            <input
+              id="quantity"
+              type="number"
+              min="1"
+              value={currentCartItem.quantity}
+              onChange={handleQuantityChange}
+              className="w-20 p-2 border rounded-lg text-center"
+            />
+          </div>
+        )}
 
         {/* Add to Cart and Wishlist Buttons */}
         <div className="flex space-x-4">
@@ -113,31 +197,6 @@ const ProductDetailsLayout = ({
           )}
         </div>
       </div>
-
-      {/* Dialog for Confirming Actions (Optional, if needed) */}
-      <Dialog open={false} onClose={() => {}}>
-        <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
-        <Dialog.Content className="fixed inset-1/4 bg-white rounded-lg p-8 shadow-xl max-w-sm w-full">
-          <Dialog.Title>Confirm Action</Dialog.Title>
-          <Dialog.Description>
-            Are you sure you want to remove this item from your wishlist?
-          </Dialog.Description>
-          <div className="flex space-x-4 mt-6">
-            <button
-              onClick={() => {}}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg"
-            >
-              Confirm
-            </button>
-            <button
-              onClick={() => {}}
-              className="px-4 py-2 bg-gray-500 text-white rounded-lg"
-            >
-              Cancel
-            </button>
-          </div>
-        </Dialog.Content>
-      </Dialog>
     </div>
   );
 };

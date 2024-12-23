@@ -18,9 +18,7 @@ const Wishlist = () => {
       {wishlistItems.length === 0 ? (
         <div className="text-center">
           <p className="text-lg text-gray-600">Your wishlist is empty.</p>
-          <Link href="/" className="text-blue-600 hover:text-blue-800 font-semibold">
-            Go back to Home
-          </Link>
+
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
