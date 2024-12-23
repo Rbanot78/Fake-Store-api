@@ -1,31 +1,25 @@
 import { useState } from "react";
 import { useFilter } from "@/context/FilterContext"; // Import your context if needed
-import { FaTimes } from "react-icons/fa"; // Close icon
+import { FaTimes, FaBars } from "react-icons/fa"; // Close and Hamburger icons
 
 const FilterDropdown = () => {
-  const { selectedCategory, setSelectedCategory, priceRange, setPriceRange, categories } = useFilter(); // Access categories from context
+  const { selectedCategory, setSelectedCategory, priceRange, setPriceRange, categories } = useFilter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [zIndex, setZIndex] = useState(10); // Set initial z-index value
+  const [zIndex, setZIndex] = useState(10);
 
-  // Toggle dropdown visibility and increase z-index
+  // Toggle dropdown visibility
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => {
       const newState = !prev;
-      if (newState) {
-        // Increase z-index when dropdown is opened
-        setZIndex(20);
-      } else {
-        // Reset z-index when dropdown is closed
-        setZIndex(10);
-      }
+      setZIndex(newState ? 20 : 10);
       return newState;
     });
   };
 
-  // Close dropdown and reset z-index
+  // Close dropdown
   const closeDropdown = () => {
     setIsDropdownOpen(false);
-    setZIndex(10); // Reset z-index when closed
+    setZIndex(10);
   };
 
   // Handle price range changes
@@ -36,15 +30,25 @@ const FilterDropdown = () => {
   // Reset both category and price range
   const resetFilters = () => {
     setSelectedCategory("");
-    setPriceRange([0, 1000]); // Reset to full range
+    setPriceRange([0, 1000]);
   };
 
   return (
     <div className="relative">
-      {/* Button to toggle the dropdown */}
+      {/* Hamburger button for mobile */}
       <button
         onClick={toggleDropdown}
-        className="px-4 py-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-700 hover:to-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+        className="md:hidden px-4 py-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-700 hover:to-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+        aria-expanded={isDropdownOpen}
+        aria-controls="filter-dropdown"
+      >
+        <FaBars className="h-6 w-6" />
+      </button>
+
+      {/* Regular button for larger screens */}
+      <button
+        onClick={toggleDropdown}
+        className="hidden md:inline px-4 py-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-700 hover:to-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
         aria-expanded={isDropdownOpen}
         aria-controls="filter-dropdown"
       >
@@ -55,15 +59,15 @@ const FilterDropdown = () => {
       {isDropdownOpen && (
         <div
           id="filter-dropdown"
-          className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg border p-4 transition-opacity duration-300 ease-in-out"
+          className="absolute top-0 left-0 w-full h-screen md:right-0 md:top-auto md:mt-2 md:w-64 bg-white shadow-lg rounded-lg border p-4 transition-opacity duration-300 ease-in-out"
           style={{ zIndex }}
         >
           {/* Close Button */}
           <button
             onClick={closeDropdown}
-            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
           >
-            <FaTimes className="h-5 w-5" />
+            <FaTimes className="h-6 w-6" />
           </button>
 
           <h3 className="text-lg font-semibold mb-4">Filters</h3>
@@ -90,7 +94,7 @@ const FilterDropdown = () => {
                 <p className="text-sm text-gray-500">No categories available</p>
               )}
               <button
-                onClick={() => resetFilters()} // Reset both category and price range
+                onClick={resetFilters}
                 className={`text-sm font-medium py-2 px-4 rounded-md border-2 transition-all duration-300 ${
                   !selectedCategory
                     ? "bg-blue-500 text-white border-blue-600"
