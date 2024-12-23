@@ -54,7 +54,11 @@ const FilterDropdown = () => {
       {/* Regular button for larger screens */}
       <button
         onClick={toggleDropdown}
+<<<<<<< HEAD
         className="hidden md:inline px-4 py-2 bg-gradient-to-r from-black to-gray-500 text-white rounded-lg shadow-md hover:from-black hover:to-gray-500 transition duration-300 ease-in-out transform hover:scale-105"
+=======
+        className="hidden md:inline px-4 py-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-700 hover:to-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+>>>>>>> 89a3f52bf75b5bf7c715f4894e7675e38ad8d6fd
         aria-expanded={isDropdownOpen}
         aria-controls="filter-dropdown"
       >
