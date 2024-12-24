@@ -16,7 +16,9 @@ const ProductDetails = ({ product }) => {
   } = useFilter();
 
   const isProductInCart = cartItems.some((item) => item.id === product.id);
-  const isProductInWishlist = wishlistItems.some((item) => item.id === product.id);
+  const isProductInWishlist = wishlistItems.some(
+    (item) => item.id === product.id
+  );
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">

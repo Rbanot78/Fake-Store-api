@@ -1,12 +1,12 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { fetchCategories } from '@/api/products';
+import { createContext, useContext, useState, useEffect } from "react";
+import { fetchCategories } from "@/api/products";
 
 const FilterContext = createContext(undefined);
 
 export const FilterProvider = ({ children }) => {
   // Filters state
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [categories, setCategories] = useState([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
@@ -26,7 +26,7 @@ export const FilterProvider = ({ children }) => {
         setCategories(data);
       } catch (error) {
         setErrorLoadingCategories(`Error: ${error.message || "Unknown error"}`);
-        console.error('Error loading categories:', error);
+        console.error("Error loading categories:", error);
       } finally {
         setLoadingCategories(false);
       }
@@ -35,14 +35,14 @@ export const FilterProvider = ({ children }) => {
     loadCategories();
 
     // Load cart and wishlist data from localStorage
-    setCartItems(JSON.parse(localStorage.getItem('cartItems')) || []);
-    setWishlistItems(JSON.parse(localStorage.getItem('wishlistItems')) || []);
+    setCartItems(JSON.parse(localStorage.getItem("cartItems")) || []);
+    setWishlistItems(JSON.parse(localStorage.getItem("wishlistItems")) || []);
   }, []);
 
   // Update localStorage whenever cart or wishlist changes
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem("wishlistItems", JSON.stringify(wishlistItems));
   }, [cartItems, wishlistItems]);
 
   // Cart functions
@@ -78,10 +78,15 @@ export const FilterProvider = ({ children }) => {
   };
 
   const removeCartItem = (productId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+    setCartItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId)
+    );
   };
 
-  const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const total = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
 
   // Wishlist functions
   const addToWishlist = (product) => {
@@ -95,7 +100,9 @@ export const FilterProvider = ({ children }) => {
   };
 
   const removeFromWishlist = (productId) => {
-    setWishlistItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+    setWishlistItems((prevItems) =>
+      prevItems.filter((item) => item.id !== productId)
+    );
   };
 
   const isProductInWishlist = (productId) => {
@@ -148,7 +155,7 @@ export const FilterProvider = ({ children }) => {
 export const useFilter = () => {
   const context = useContext(FilterContext);
   if (context === undefined) {
-    throw new Error('useFilter must be used within a FilterProvider');
+    throw new Error("useFilter must be used within a FilterProvider");
   }
   return context;
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useFilter } from "@/context/FilterContext"; // Import your context if needed
 import { FaTimes, FaBars } from "react-icons/fa"; // Close and Hamburger icons
 
@@ -12,6 +12,7 @@ const FilterDropdown = () => {
   } = useFilter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [zIndex, setZIndex] = useState(10);
+  const dropdownRef = useRef(null);
 
   // Toggle dropdown visibility
   const toggleDropdown = () => {
@@ -39,6 +40,23 @@ const FilterDropdown = () => {
     setPriceRange([0, 1000]);
   };
 
+  // Close the dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        closeDropdown();
+      }
+    };
+
+    // Add event listener for clicks outside
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // Cleanup event listener on component unmount
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="relative">
       {/* Hamburger button for mobile */}
@@ -54,11 +72,7 @@ const FilterDropdown = () => {
       {/* Regular button for larger screens */}
       <button
         onClick={toggleDropdown}
-<<<<<<< HEAD
-        className="hidden md:inline px-4 py-2 bg-gradient-to-r from-black to-gray-500 text-white rounded-lg shadow-md hover:from-black hover:to-gray-500 transition duration-300 ease-in-out transform hover:scale-105"
-=======
-        className="hidden md:inline px-4 py-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-lg shadow-md hover:from-indigo-700 hover:to-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
->>>>>>> 89a3f52bf75b5bf7c715f4894e7675e38ad8d6fd
+        className="hidden md:inline px-4 py-2 bg-gradient-to-r from-black to-gray-500 text-white rounded-lg shadow-md hover:from-gray-700 hover:to-black transition duration-300 ease-in-out transform hover:scale-105"
         aria-expanded={isDropdownOpen}
         aria-controls="filter-dropdown"
       >
@@ -69,12 +83,10 @@ const FilterDropdown = () => {
       {isDropdownOpen && (
         <div
           id="filter-dropdown"
+          ref={dropdownRef}
           className={`absolute ${
             isDropdownOpen ? "opacity-100" : "opacity-0"
-          } transition-opacity duration-300 ease-in-out ${
-            // Adjust dropdown styles for mobile and normal screens
-            "top-0 left-100 w-full  md:w-80 md:h-auto md:right-0 md:top-auto md:mt-2 md:shadow-lg md:rounded-lg"
-          } bg-white shadow-lg border p-4`}
+          } transition-opacity duration-300 ease-in-out ${"top-0 left-100 w-full  md:w-80 md:h-auto md:right-0 md:top-auto md:mt-2 md:shadow-lg md:rounded-lg"} bg-white shadow-lg border p-4`}
           style={{ zIndex }}
         >
           {/* Close Button */}

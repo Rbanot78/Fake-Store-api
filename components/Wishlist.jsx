@@ -28,7 +28,9 @@ const WishlistItem = ({ product, onAddToCart, onRemoveFromWishlist }) => {
         </Link>
 
         {/* Product Price */}
-        <p className="text-xl font-semibold text-blue-600 mt-3">${product.price}</p>
+        <p className="text-xl font-semibold text-blue-600 mt-3">
+          ${product.price}
+        </p>
       </div>
 
       {/* Actions */}

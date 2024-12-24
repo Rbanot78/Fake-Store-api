@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart, faHeart, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShoppingCart,
+  faHeart,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 
 const ProductCard = ({
@@ -36,8 +40,10 @@ const ProductCard = ({
 
       {/* Content Section */}
       <div className="flex-grow">
-        <h2 className="text-sm font-semibold text-gray-700 truncate">{product.title}</h2>
-        
+        <h2 className="text-sm font-semibold text-gray-700 truncate">
+          {product.title}
+        </h2>
+
         {/* Price Section */}
         <div className="mt-2">
           {discount > 0 && (
@@ -49,7 +55,9 @@ const ProductCard = ({
             ${discount > 0 ? discountedPrice : product.price}
           </p>
           {discount > 0 && (
-            <span className="text-sm text-red-600 font-medium">-{discount}%</span>
+            <span className="text-sm text-red-600 font-medium">
+              -{discount}%
+            </span>
           )}
         </div>
       </div>

@@ -80,7 +80,6 @@ const Home = ({ initialProducts }) => {
     toast.success("Item removed from wishlist!");
   };
 
- 
   return (
     <div className="flex flex-col min-h-screen bg-gray-500">
       <Navbar />
@@ -97,9 +96,8 @@ const Home = ({ initialProducts }) => {
             </div>
             <div className="sm:w-full md:w-auto">
               {/* Filter Button */}
-            
-                <FilterComponent />
-        
+
+              <FilterComponent />
             </div>
           </div>
         </div>

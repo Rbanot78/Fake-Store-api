@@ -15,7 +15,7 @@ const ProductDetailsLayout = ({
 }) => {
   const { updateCartItem, cartItems } = useFilter(); // Get the function to update cart
 
-  const currentCartItem = cartItems.find(item => item.id === product.id); // Find current product in cart
+  const currentCartItem = cartItems.find((item) => item.id === product.id); // Find current product in cart
 
   // Handles adding to the cart with appropriate toasts
   const handleAddToCart = () => {
@@ -72,7 +72,10 @@ const ProductDetailsLayout = ({
   // Handle rating change
   const handleRatingChange = (newRating) => {
     // Update rating in cart
-    updateCartItem(product.id, { ...product, rating: { rate: newRating, count: product.rating.count } });
+    updateCartItem(product.id, {
+      ...product,
+      rating: { rate: newRating, count: product.rating.count },
+    });
     toast.success(`Rating updated to ${newRating}`, {
       position: "top-center",
     });
@@ -125,20 +128,29 @@ const ProductDetailsLayout = ({
               <motion.div
                 key={index}
                 onClick={() => handleRatingChange(index + 1)}
-                className={`cursor-pointer ${index < product.rating.rate ? 'text-yellow-500' : 'text-gray-300'}`}
+                className={`cursor-pointer ${
+                  index < product.rating.rate
+                    ? "text-yellow-500"
+                    : "text-gray-300"
+                }`}
                 whileHover={{ scale: 1.2 }}
               >
                 <FaHeart />
               </motion.div>
             ))}
-            <span className="text-sm text-gray-600">({product.rating.count} reviews)</span>
+            <span className="text-sm text-gray-600">
+              ({product.rating.count} reviews)
+            </span>
           </div>
         </div>
 
         {/* Quantity Selector */}
         {isProductInCart && currentCartItem && (
           <div className="flex items-center mb-6">
-            <label htmlFor="quantity" className="text-lg sm:text-xl font-semibold text-gray-800 mr-4">
+            <label
+              htmlFor="quantity"
+              className="text-lg sm:text-xl font-semibold text-gray-800 mr-4"
+            >
               Quantity:
             </label>
             <input

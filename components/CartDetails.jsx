@@ -1,8 +1,8 @@
-import { useFilter } from '@/context/FilterContext';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinus, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { motion } from 'framer-motion';
+import { useFilter } from "@/context/FilterContext";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 const CartDetails = ({ cartItem }) => {
   const { updateCartItem, removeCartItem } = useFilter();
@@ -26,9 +26,13 @@ const CartDetails = ({ cartItem }) => {
               className="h-24 w-24 object-cover rounded-lg border border-gray-200 shadow-md"
             />
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-gray-800">{cartItem.title}</h3>
+              <h3 className="text-lg font-semibold text-gray-800">
+                {cartItem.title}
+              </h3>
               <p className="text-gray-600">Price: ${cartItem.price}</p>
-              <p className="text-gray-600">Total: ${(cartItem.price * cartItem.quantity).toFixed(2)}</p>
+              <p className="text-gray-600">
+                Total: ${(cartItem.price * cartItem.quantity).toFixed(2)}
+              </p>
             </div>
           </div>
         </Link>
@@ -45,7 +49,9 @@ const CartDetails = ({ cartItem }) => {
             <FontAwesomeIcon icon={faMinus} />
           </button>
 
-          <span className="text-lg font-medium text-gray-700">{cartItem.quantity}</span>
+          <span className="text-lg font-medium text-gray-700">
+            {cartItem.quantity}
+          </span>
 
           <button
             onClick={() => updateCartItem(cartItem.id, cartItem.quantity + 1)}

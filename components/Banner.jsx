@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Banner = ({ imageUrl, heading, subheading, buttonText, buttonLink }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,13 +28,13 @@ const Banner = ({ imageUrl, heading, subheading, buttonText, buttonLink }) => {
       {/* Banner Content */}
       <div
         className={`absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white bg-black bg-opacity-50 transition-opacity duration-1000 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
+          isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
         {/* Heading with slide-in effect */}
         <h1
           className={`text-4xl md:text-5xl font-bold transform transition-all duration-1000 ${
-            isVisible ? 'translate-y-0' : 'translate-y-10 opacity-0'
+            isVisible ? "translate-y-0" : "translate-y-10 opacity-0"
           }`}
         >
           {heading}
@@ -43,7 +43,7 @@ const Banner = ({ imageUrl, heading, subheading, buttonText, buttonLink }) => {
         {/* Subheading with a slight delay for the animation */}
         <p
           className={`mt-4 text-lg md:text-xl transition-all duration-1000 delay-300 ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
           {subheading}

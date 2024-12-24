@@ -13,12 +13,13 @@ const Wishlist = () => {
 
   return (
     <div className="container mx-auto px-4 py-10">
-      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">Your Wishlist</h2>
+      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">
+        Your Wishlist
+      </h2>
 
       {wishlistItems.length === 0 ? (
         <div className="text-center">
           <p className="text-lg text-gray-600">Your wishlist is empty.</p>
-
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">

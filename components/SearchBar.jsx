@@ -39,7 +39,10 @@ const SearchBar = ({ products, setFilteredProducts }) => {
   // Close suggestions when clicking outside the search bar
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+      if (
+        searchBarRef.current &&
+        !searchBarRef.current.contains(event.target)
+      ) {
         setIsSuggestionsVisible(false);
       }
     };

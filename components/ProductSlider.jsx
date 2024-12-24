@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/swiper-bundle.css';
-import Image from 'next/image';
-import Link from 'next/link';
-import { fetchProducts } from '@/api/products';
-import { FaShoppingCart, FaHeart } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/swiper-bundle.css";
+import Image from "next/image";
+import Link from "next/link";
+import { fetchProducts } from "@/api/products";
+import { FaShoppingCart, FaHeart } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const ProductSlider = () => {
   const [products, setProducts] = useState([]);
@@ -17,7 +17,7 @@ const ProductSlider = () => {
         const data = await fetchProducts();
         setProducts(data);
       } catch (error) {
-        console.error('Error fetching products', error);
+        console.error("Error fetching products", error);
       }
     };
 
@@ -26,7 +26,6 @@ const ProductSlider = () => {
 
   return (
     <div className="product-slider mt-12 px-4 sm:px-6 lg:px-8">
-    
       <Swiper
         spaceBetween={20}
         navigation
@@ -74,7 +73,9 @@ const ProductSlider = () => {
                       ? `${product.title.substring(0, 20)}...`
                       : product.title}
                   </h3>
-                  <p className="text-lg text-blue-600 mt-2 font-medium">${product.price}</p>
+                  <p className="text-lg text-blue-600 mt-2 font-medium">
+                    ${product.price}
+                  </p>
                   <div className="mt-4 flex justify-center items-center gap-2">
                     <span className="px-3 py-1 text-sm text-white bg-blue-500 rounded-lg">
                       {product.category}

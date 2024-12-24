@@ -1,8 +1,8 @@
 // pages/cart.js
-import { useFilter } from '@/context/FilterContext';
-import { useState } from 'react';
-import Link from 'next/link';  // Import Link for navigation
-import CartDetails from '@/components/CartDetails';  // Import the CartDetails component
+import { useFilter } from "@/context/FilterContext";
+import { useState } from "react";
+import Link from "next/link"; // Import Link for navigation
+import CartDetails from "@/components/CartDetails"; // Import the CartDetails component
 
 const Cart = () => {
   const { cartItems, total } = useFilter();
@@ -18,16 +18,21 @@ const Cart = () => {
   return (
     <div className="cart container mx-auto p-6">
       <h2 className="text-3xl font-extrabold text-gray-800 mb-6">Your Cart</h2>
-      
+
       {/* Home Button */}
       <div className="mb-6">
-        <Link href="/" className="inline-block text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out">
+        <Link
+          href="/"
+          className="inline-block text-blue-600 hover:text-blue-800 transition duration-300 ease-in-out"
+        >
           &larr; Back to Home
         </Link>
       </div>
 
       {cartItems.length === 0 ? (
-        <div className="text-center text-lg text-gray-600">Your cart is empty. Please add some products to your cart!</div>
+        <div className="text-center text-lg text-gray-600">
+          Your cart is empty. Please add some products to your cart!
+        </div>
       ) : (
         <>
           <ul className="space-y-6">
@@ -38,7 +43,9 @@ const Cart = () => {
 
           {/* Cart Total */}
           <div className="mt-6 bg-gray-100 p-5 rounded-lg flex justify-between items-center shadow-md">
-            <h3 className="text-xl font-semibold text-gray-800">Total Price:</h3>
+            <h3 className="text-xl font-semibold text-gray-800">
+              Total Price:
+            </h3>
             <p className="text-xl font-bold text-blue-600">${roundedTotal}</p>
           </div>
 

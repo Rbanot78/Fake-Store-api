@@ -4,7 +4,8 @@ import { useFilter } from "@/context/FilterContext";
 import Link from "next/link";
 
 const Navbar = () => {
-  const { cartItems, wishlistItems, removeCartItem, removeFromWishlist } = useFilter();
+  const { cartItems, wishlistItems, removeCartItem, removeFromWishlist } =
+    useFilter();
   const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
   const [isWishlistDropdownOpen, setIsWishlistDropdownOpen] = useState(false);
 
@@ -56,7 +57,10 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           {/* Cart Icon */}
           <div className="relative" ref={cartRef}>
-            <button onClick={toggleCartDropdown} className="relative text-white">
+            <button
+              onClick={toggleCartDropdown}
+              className="relative text-white"
+            >
               <FaShoppingCart className="text-2xl" />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
@@ -77,7 +81,9 @@ const Navbar = () => {
 
                 <h3 className="text-lg font-semibold mb-4">Your Cart</h3>
                 {cartItems.length === 0 ? (
-                  <p className="text-center text-sm text-gray-500">Your cart is empty.</p>
+                  <p className="text-center text-sm text-gray-500">
+                    Your cart is empty.
+                  </p>
                 ) : (
                   <ul className="space-y-4">
                     {cartItems.map((item) => (
@@ -92,7 +98,9 @@ const Navbar = () => {
                             className="h-10 w-10 object-cover rounded-lg border"
                           />
                           <div className="max-w-[150px]">
-                            <p className="font-semibold text-gray-800 truncate">{item.title}</p>
+                            <p className="font-semibold text-gray-800 truncate">
+                              {item.title}
+                            </p>
                           </div>
                         </div>
                         <button
@@ -118,7 +126,10 @@ const Navbar = () => {
 
           {/* Wishlist Icon */}
           <div className="relative" ref={wishlistRef}>
-            <button onClick={toggleWishlistDropdown} className="relative text-white">
+            <button
+              onClick={toggleWishlistDropdown}
+              className="relative text-white"
+            >
               <FaHeart className="text-2xl" />
               {wishlistCount > 0 && (
                 <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full px-1">
@@ -139,7 +150,9 @@ const Navbar = () => {
 
                 <h3 className="text-lg font-semibold mb-4">Your Wishlist</h3>
                 {wishlistItems.length === 0 ? (
-                  <p className="text-center text-sm text-gray-500">Your wishlist is empty.</p>
+                  <p className="text-center text-sm text-gray-500">
+                    Your wishlist is empty.
+                  </p>
                 ) : (
                   <ul className="space-y-4">
                     {wishlistItems.map((item) => (
@@ -154,7 +167,9 @@ const Navbar = () => {
                             className="h-10 w-10 object-cover rounded-lg border"
                           />
                           <div className="max-w-[150px]">
-                            <p className="font-semibold text-gray-800 truncate">{item.title}</p>
+                            <p className="font-semibold text-gray-800 truncate">
+                              {item.title}
+                            </p>
                           </div>
                         </div>
                         <button

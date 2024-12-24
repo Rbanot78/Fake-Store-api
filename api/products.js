@@ -1,11 +1,11 @@
 // Fetch products from API
 export const fetchProducts = async () => {
   try {
-    const res = await fetch('https://fakestoreapi.com/products');
+    const res = await fetch("https://fakestoreapi.com/products");
     const data = await res.json();
     return data;
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     return [];
   }
 };
@@ -17,12 +17,12 @@ export const fetchProductById = async (id) => {
   try {
     const res = await fetch(`https://fakestoreapi.com/products/${id}`);
     if (!res.ok) {
-      throw new Error('Product not found');
+      throw new Error("Product not found");
     }
     const product = await res.json();
     return product;
   } catch (error) {
-    console.error('Error fetching product by id:', error);
+    console.error("Error fetching product by id:", error);
     return null;
   }
 };
@@ -30,14 +30,14 @@ export const fetchProductById = async (id) => {
 // Fetch categories from API
 export const fetchCategories = async () => {
   try {
-    const res = await fetch('https://fakestoreapi.com/products/categories');
+    const res = await fetch("https://fakestoreapi.com/products/categories");
     if (!res.ok) {
-      throw new Error('Failed to fetch categories');
+      throw new Error("Failed to fetch categories");
     }
     const categories = await res.json();
     return categories;
   } catch (error) {
-    console.error('Error fetching categories:', error);
+    console.error("Error fetching categories:", error);
     return [];
   }
 };
@@ -45,14 +45,16 @@ export const fetchCategories = async () => {
 // Fetch products by category from API
 export const fetchProductsByCategory = async (category) => {
   try {
-    const res = await fetch(`https://fakestoreapi.com/products/category/${category}`);
+    const res = await fetch(
+      `https://fakestoreapi.com/products/category/${category}`
+    );
     if (!res.ok) {
-      throw new Error('Failed to fetch products by category');
+      throw new Error("Failed to fetch products by category");
     }
     const products = await res.json();
     return products;
   } catch (error) {
-    console.error('Error fetching products by category:', error);
+    console.error("Error fetching products by category:", error);
     return [];
   }
 };
@@ -60,11 +62,11 @@ export const fetchProductsByCategory = async (category) => {
 // Fetch products by card from API
 export const fetchCart = async () => {
   try {
-    const res = await fetch('https://fakestoreapi.com/carts');
+    const res = await fetch("https://fakestoreapi.com/carts");
     const data = await res.json();
     return data;
   } catch (error) {
-    console.error('Error fetching cart data:', error);
+    console.error("Error fetching cart data:", error);
     return [];
   }
 };
